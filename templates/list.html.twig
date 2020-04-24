@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-8 align-center">
+            <h1>Blogs</h1>
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <table class="table table-striped ">
+                <thead class="thead-dark">
+
+                <tr>
+                    <th>Title</th>
+                    <th>Short description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for blog in blogs %}
+                    <tr>
+                        <td>{{ blog.title }}</td>
+                        <td>{{ blog.shortDescription }}</td>
+                        <td>
+                            <a href="{{ path('app_main_editblog', {id: blog.id}) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ path('app_blog_delete', {id: blog.id}) }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">DELETE</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8  align-center">
+            <a href="{{ path('app_main_createblog') }}" class="btn btn-primary">Create blog</a>
+        </div>
+    </div>
+
+
+
+{% endblock %}
